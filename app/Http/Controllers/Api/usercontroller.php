@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\facades\Hash;
 
-class usercontroller extends Controller
+class userController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +23,14 @@ class usercontroller extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        //retrieve the validated import data
+        $validated = $request->validated();
+        $validated['password'] = hash::make($validated['password']);
+        $User = User::create($validated);
+
+        return $User;
     }
 
     /**
@@ -30,8 +38,9 @@ class usercontroller extends Controller
      */
     public function show(string $id)
     {
-        //
+        return User::find($id);
     }
+
 
 
 
