@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\carouselItemRequest;
 use Illuminate\Http\Request;
-use App\Models\CarouselItems;
+use App\Models\carouselItems;
 
-class carouselitemcontrollers extends Controller
+class CarouselItemsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +25,7 @@ class carouselitemcontrollers extends Controller
     {
         //retrieve the validated import data
         $validated = $request->validated();
-        $CarouselItems = CarouselItems::create($validated);
+        $carouselItems = carouselItems::create($validated);
     }
 
     /**
